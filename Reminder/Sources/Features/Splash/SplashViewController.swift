@@ -12,7 +12,7 @@ class SplashViewController : UIViewController {
     
     private lazy var contentView : SplashView = {
         let splashView = SplashView()
-        splashView.backgroundColor = Colors.PrimaryDefault
+        splashView.backgroundColor = Colors.primaryRedBase
         splashView.translatesAutoresizingMaskIntoConstraints = false
         return splashView
     }()
