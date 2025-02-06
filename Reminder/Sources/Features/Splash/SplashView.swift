@@ -11,12 +11,12 @@ import SwiftUI
 
 class SplashView : UIView {
 
-    private let logoImgView : UIImageView = {
-        let logoImg = UIImageView()
-        logoImg.image = UIImage(named: "Logo")
-        logoImg.contentMode = .scaleAspectFit
-        logoImg.translatesAutoresizingMaskIntoConstraints = false;
-        return logoImg
+    private let logoImageView : UIImageView = {
+        let image = UIImageView()
+        image.image = UIImage(named: "Logo")
+        image.contentMode = .scaleAspectFit
+        image.translatesAutoresizingMaskIntoConstraints = false;
+        return image
     }()
 
     override init(frame: CGRect) {
@@ -29,15 +29,15 @@ class SplashView : UIView {
     }
     
     private func setupUI(){
-        addSubview(logoImgView)
+        addSubview(logoImageView)
         
         setupConstraints()
     }
     
     private func setupConstraints(){
         NSLayoutConstraint.activate([
-            logoImgView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImgView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
 }
