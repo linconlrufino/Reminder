@@ -65,6 +65,7 @@ class LoginBottomSheetView: UIView {
         backgroundColor = .white
         self.layer.cornerRadius = Metrics.small
         
+        addSubview(handleArea)
         addSubview(titleLabel)
         addSubview(emailTextField)
         addSubview(passwordTextField)
@@ -75,20 +76,26 @@ class LoginBottomSheetView: UIView {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 70),
+            handleArea.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.small),
+            handleArea.centerXAnchor.constraint(equalTo: centerXAnchor),
+            handleArea.widthAnchor.constraint(equalToConstant: 40),
+            handleArea.heightAnchor.constraint(equalToConstant: 6),
+            
+            titleLabel.topAnchor.constraint(equalTo: handleArea.bottomAnchor, constant: Metrics.medium),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             
             emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.huge),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+//            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+//            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
             
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.medium),
             loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 }
