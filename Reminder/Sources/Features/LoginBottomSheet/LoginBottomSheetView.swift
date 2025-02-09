@@ -21,6 +21,7 @@ class LoginBottomSheetView: UIView {
     
     private lazy var titleLabel: UILabel = {
         let title = UILabel()
+        title.font = Typography.label
         title.text = "Entre para acessar suas receitas"
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
@@ -30,6 +31,7 @@ class LoginBottomSheetView: UIView {
         let text = UITextField()
         text.placeholder = "email@exemplo.com"
         text.borderStyle = .roundedRect
+        text.font = Typography.input
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -39,6 +41,7 @@ class LoginBottomSheetView: UIView {
         text.placeholder = "senha"
         text.borderStyle = .roundedRect
         text.isSecureTextEntry = true
+        text.font = Typography.input
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
@@ -48,7 +51,7 @@ class LoginBottomSheetView: UIView {
         button.setTitle("Entrar", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = Colors.primaryRedBase
-        button.layer.cornerRadius = Metrics.small
+        button.layer.cornerRadius = Metrics.medium
         return button
     }()
     
@@ -86,11 +89,15 @@ class LoginBottomSheetView: UIView {
             
             emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.huge),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-//            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            emailTextField.heightAnchor.constraint(equalToConstant: Metrics.huge),
+
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
-//            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
+            passwordTextField.heightAnchor.constraint(equalToConstant: Metrics.huge),
+
             
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.medium),
             loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
