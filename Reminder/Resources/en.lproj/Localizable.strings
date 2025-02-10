@@ -9,7 +9,9 @@
 // MARK: - Login Screen
 
 "login.label.title" = "Entre para acessar suas receitas";
+"login.email.label.title" = "E-mail";
 "login.email.placeholder" = "email@exemplo.com";
+"login.password.label.title" = "Senha";
 "login.password.placeholder" = "senha";
 "login.button.title" = "Entrar";
 

@@ -11,20 +11,22 @@ import SwiftUI
 
 class LoginBottomSheetView: UIView {
     
-    private lazy var handleArea: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightGray
-        view.layer.cornerRadius = Metrics.tiny
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    private lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = Typography.subHeading
+        label.text = "login.label.title".localize
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private lazy var titleLabel: UILabel = {
-        let title = UILabel()
-        title.font = Typography.label
-        title.text = "login.label.title".localize
-        title.translatesAutoresizingMaskIntoConstraints = false
-        return title
+    private lazy var emailTitle: UILabel = {
+        let label = UILabel()
+        label.font = Typography.body
+        label.text = "login.email.label.title".localize
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var emailTextField: UITextField = {
@@ -34,6 +36,15 @@ class LoginBottomSheetView: UIView {
         text.font = Typography.input
         text.translatesAutoresizingMaskIntoConstraints = false
         return text
+    }()
+    
+    private lazy var passwordTitle: UILabel = {
+        let label = UILabel()
+        label.font = Typography.body
+        label.text = "login.password.label.title".localize
+        label.isUserInteractionEnabled = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var passwordTextField: UITextField = {
@@ -51,13 +62,23 @@ class LoginBottomSheetView: UIView {
         button.setTitle("login.button.title".localize, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = Colors.primaryRedBase
+        button.tintColor = .white
         button.layer.cornerRadius = Metrics.medium
+        button.titleLabel?.font = Typography.subHeading
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        
+        let exampleGest = UITapGestureRecognizer(target: self, action: #selector(exampelTaped))
+        titleLabel.addGestureRecognizer(exampleGest)
+    }
+    
+    @objc
+    private func exampelTaped(){
+        print("clicou na tela")
     }
     
     required init?(coder: NSCoder) {
@@ -68,9 +89,10 @@ class LoginBottomSheetView: UIView {
         backgroundColor = .white
         self.layer.cornerRadius = Metrics.small
         
-        addSubview(handleArea)
         addSubview(titleLabel)
+        addSubview(emailTitle)
         addSubview(emailTextField)
+        addSubview(passwordTitle)
         addSubview(passwordTextField)
         addSubview(loginButton)
         
@@ -79,30 +101,30 @@ class LoginBottomSheetView: UIView {
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            handleArea.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.small),
-            handleArea.centerXAnchor.constraint(equalTo: centerXAnchor),
-            handleArea.widthAnchor.constraint(equalToConstant: 40),
-            handleArea.heightAnchor.constraint(equalToConstant: 6),
             
-            titleLabel.topAnchor.constraint(equalTo: handleArea.bottomAnchor, constant: Metrics.medium),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.medium),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             
-            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.huge),
+            emailTitle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.medium),
+            emailTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
+            
+            emailTextField.topAnchor.constraint(equalTo: emailTitle.bottomAnchor, constant: Metrics.small),
             emailTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             emailTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
-            emailTextField.heightAnchor.constraint(equalToConstant: Metrics.huge),
-
+            emailTextField.heightAnchor.constraint(equalToConstant: Metrics.inputSize),
             
-            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
+            passwordTitle.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
+            passwordTitle.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
+            
+            passwordTextField.topAnchor.constraint(equalTo: passwordTitle.bottomAnchor, constant: Metrics.small),
             passwordTextField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             passwordTextField.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
-            passwordTextField.heightAnchor.constraint(equalToConstant: Metrics.huge),
+            passwordTextField.heightAnchor.constraint(equalToConstant: Metrics.inputSize),
 
-            
-            loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.medium),
             loginButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             loginButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.medium),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
+            loginButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Metrics.huge),
+            loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize)
         ])
     }
 }
