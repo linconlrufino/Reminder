@@ -11,6 +11,8 @@ import SwiftUI
 
 class LoginBottomSheetView: UIView {
     
+    public weak var delegate: LoginBottomSheetViewDelegate?
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Typography.subHeading
@@ -65,6 +67,7 @@ class LoginBottomSheetView: UIView {
         button.tintColor = .white
         button.layer.cornerRadius = Metrics.medium
         button.titleLabel?.font = Typography.subHeading
+        button.addTarget(self, action: #selector(loginButtonDidTapped), for: .touchUpInside)
         return button
     }()
     
@@ -102,7 +105,7 @@ class LoginBottomSheetView: UIView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.medium),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Metrics.huge),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.medium),
             
             emailTitle.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Metrics.medium),
@@ -126,6 +129,13 @@ class LoginBottomSheetView: UIView {
             loginButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Metrics.huge),
             loginButton.heightAnchor.constraint(equalToConstant: Metrics.buttonSize)
         ])
+    }
+    
+    @objc
+    private func loginButtonDidTapped() {
+        let user = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        delegate?.sendLoginData(user: user, password: password)
     }
 }
 
